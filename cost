@@ -1,0 +1,9 @@
+
+with temp(cid,day,price,weight) as (select distinct P.cid as cid,cast(P.when as date) as day,sum(O.price*qnty) as price,sum(B.weight) as weight
+from yrb_purchase P,yrb_offer O,yrb_book B
+where P.title=O.title and P.title=B.title and P.year =O.year and P.year=B.year and P.club=O.club
+group by P.cid,P.when
+order by P.cid)
+
+select T.cid as cid,T.day as day,T.price+(select min(S.cost) from yrb_shipping S 
+where S.weight>=T.weight) as cost from temp T;

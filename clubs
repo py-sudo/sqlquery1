@@ -1,0 +1,3 @@
+select count(distinct B.cid) as #basic ,count(distinct A.cid) as #AAA
+from yrb_member A,yrb_member B 
+where A.club='AAA' and B.club='Basic';

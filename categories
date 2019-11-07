@@ -1,0 +1,9 @@
+
+with category(cid,cat,price)as (select distinct  P.cid as cid,B.cat as cat,sum(O.price) as price 
+from yrb_book B,yrb_offer O,yrb_purchase P
+where P.title=B.title and P.title=O.title and P.year=B.year and P.club=O.club 
+group by B.cat,P.cid)
+select A.name as name,C.cat as cat,C.price as cost
+from category C,yrb_customer A
+where C.cid=A.cid;
+

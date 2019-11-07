@@ -1,0 +1,7 @@
+with A(club,price) as (select distinct O.club as club,max(O.price) as price from yrb_offer O,yrb_book B 
+where O.title=B.title and O.year=B.year and B.language='English'
+group by O.club)
+
+select B.title as title,B.year as year,O.price as price
+from yrb_book B,yrb_offer O
+where B.title = O.title and B.year = O.year and O.price > (select avg(A.price) from A);

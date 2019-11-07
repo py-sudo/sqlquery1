@@ -1,0 +1,13 @@
+	
+with D(cid,cat,price) as 
+(select P.cid as cid,B.cat as cat,O.price as price
+from yrb_purchase P,yrb_book B,yrb_offer O
+where P.title = B.title and P.title=O.title and P.year=B.year and P.year=O.year and P.club=O.club),
+E(cat,cid,sum) as (select distinct D.cat as cat,D.cid as cid,sum(D.price) as price
+from D group by D.cat,D.cid),
+MaxPrice(cid,price) as (select distinct E.cid as cid,Max(E.sum) as price from E group by E.cid)
+
+
+select (select C.name from yrb_customer C where C.cid = E.cid) as name,E.cat as cat,E.sum as COST
+from E,MaxPrice
+where E.cid=MaxPrice.cid and E.sum=MaxPrice.price;

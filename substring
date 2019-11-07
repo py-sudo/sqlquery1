@@ -1,0 +1,3 @@
+select B.title as title,B.year as year,B.cat as CAT
+from yrb_book B
+where lower(B.title) like '%'||lower(B.cat)||'%';

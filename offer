@@ -1,0 +1,8 @@
+
+with B(title,year,count) as (select distinct O.title as title,O.year as year,count(O.club) AS number from 
+yrb_offer O,yrb_book B
+where O.title = B.title and O.year = B.year
+group by O.title,O.year)
+
+select B.title as title,B.year as year 
+from B where B.count=8;

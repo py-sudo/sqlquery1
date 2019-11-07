@@ -1,0 +1,8 @@
+with Q(club,number) as  
+(select  M.club as club,count(M.cid) as number 
+from yrb_member M 
+where M.club in (select club from yrb_club)
+group by M.club)
+select Q.club as club,Q.number as count
+from Q 
+where Q.number = (select MIN(Q.number)from Q);

@@ -1,0 +1,6 @@
+with Member(cid,number) as (select distinct F.cid as cid ,count(F.club) as number from (select distinct M.club as club,M.cid as cid from yrb_member M group by M.club,M.cid) F group by cid),
+Purchase(cid,number) as (select distinct A.cid as cid,count(A.club) as number from (select distinct P.cid as cid, P.club as club from yrb_purchase P group by cid,club) A group by cid)
+
+select C.cid as cid,C.name as name 
+from yrb_customer C,Member, Purchase
+where C.cid=Member.cid and c.cid=Purchase.cid and Member.number<>0 and Member.number>Purchase.number;

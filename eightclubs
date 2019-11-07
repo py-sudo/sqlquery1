@@ -1,0 +1,9 @@
+
+with newOffer(title,year,numberOfClubs)as (select O.title as title,O.year as year,count(O.club) as numberOfClubs
+ from yrb_offer O
+ group by O.title,O.year)
+ 
+ select N.title as title,N.year as year
+ from newOffer N 
+ where N.numberOfClubs=8;
+ 

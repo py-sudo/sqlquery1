@@ -1,0 +1,10 @@
+	
+with own(cid, title, year) as
+(select cid, title, year
+from yrb_purchase P
+group by cid, title, year)
+select distinct A.name as customera, B.name as customerb
+from yrb_customer A, yrb_customer B, own P, own Q
+where A.cid > B.cid and 
+A.cid = P.cid and B.cid = Q.cid and
+P.title = Q.title and P.year = Q.year;
